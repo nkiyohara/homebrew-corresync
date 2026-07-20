@@ -1,0 +1,34 @@
+name: Test Formula
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: formula-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test:
+    name: Audit, install, and test
+    runs-on: macos-latest
+    timeout-minutes: 15
+    steps:
+      - name: Check out tap
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          persist-credentials: false
+
+      - name: Audit Formula
+        run: brew audit --formula Formula/owa-bridge.rb
+
+      - name: Build from source and test
+        run: |
+          brew install --build-from-source ./Formula/owa-bridge.rb
+          brew test owa-bridge
+          owa version --json
