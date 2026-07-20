@@ -14,7 +14,9 @@ class OwaBridge < Formula
       -X github.com/nkiyohara/owa-bridge/internal/buildinfo.commit=2eb65385d70a66dad62a22ea2407a607dd60845d
       -X github.com/nkiyohara/owa-bridge/internal/buildinfo.buildDate=2026-07-20T12:01:52.264513177Z
     ]
-    system "go", "build", "-mod=vendor", *std_go_args(ldflags: ldflags.join(" ")), "./cmd/owa"
+    system "go", "build", "-mod=vendor",
+           *std_go_args(output: bin/"owa", ldflags: ldflags.join(" ")),
+           "./cmd/owa"
 
     man1.install "manpages/owa.1"
     bash_completion.install "completions/owa.bash" => "owa"
