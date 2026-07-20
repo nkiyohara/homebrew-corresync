@@ -24,11 +24,16 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: Stage Formula in the tap
+        run: |
+          brew tap nkiyohara/owa-bridge
+          cp Formula/owa-bridge.rb "$(brew --repository nkiyohara/owa-bridge)/Formula/owa-bridge.rb"
+
       - name: Audit Formula
-        run: brew audit --formula Formula/owa-bridge.rb
+        run: brew audit --formula nkiyohara/owa-bridge/owa-bridge
 
       - name: Build from source and test
         run: |
-          brew install --build-from-source ./Formula/owa-bridge.rb
-          brew test owa-bridge
+          brew install --build-from-source nkiyohara/owa-bridge/owa-bridge
+          brew test nkiyohara/owa-bridge/owa-bridge
           owa version --json
