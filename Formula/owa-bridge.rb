@@ -1,8 +1,8 @@
 class OwaBridge < Formula
   desc "Local-first Outlook Web CLI and MCP server"
   homepage "https://github.com/nkiyohara/owa-bridge"
-  url "https://github.com/nkiyohara/owa-bridge/releases/download/v0.3.2/owa-bridge_0.3.2_source.tar.gz"
-  sha256 "b26142f153cdf89fa11fe148eb0604e00b5ac5f44c99f571dd72529a1800f779"
+  url "https://github.com/nkiyohara/owa-bridge/releases/download/v0.4.1/owa-bridge_0.4.1_source.tar.gz"
+  sha256 "b2f60889357aa5f4315e48c3007478e9964824d3bbb04d2c955997e6f8b354ab"
   license "Apache-2.0"
 
   depends_on "go" => :build
@@ -11,8 +11,8 @@ class OwaBridge < Formula
     ldflags = %W[
       -s -w -buildid=
       -X github.com/nkiyohara/owa-bridge/internal/buildinfo.version=#{version}
-      -X github.com/nkiyohara/owa-bridge/internal/buildinfo.commit=ce23a87e95403fab4117ca7e3a674a0f300fb51e
-      -X github.com/nkiyohara/owa-bridge/internal/buildinfo.buildDate=2026-07-20T12:23:26.639722835Z
+      -X github.com/nkiyohara/owa-bridge/internal/buildinfo.commit=daca9292952cad138bd84535ea1491186cc07c1c
+      -X github.com/nkiyohara/owa-bridge/internal/buildinfo.buildDate=2026-07-22T20:13:59.844348131Z
     ]
     system "go", "build", "-mod=vendor",
            *std_go_args(output: bin/"owa", ldflags: ldflags.join(" ")),
@@ -22,6 +22,9 @@ class OwaBridge < Formula
     bash_completion.install "completions/owa.bash" => "owa"
     zsh_completion.install "completions/_owa"
     fish_completion.install "completions/owa.fish"
+    pkgshare.install "plugins"
+    (pkgshare/".agents").install ".agents/plugins"
+    (pkgshare/".claude-plugin").install ".claude-plugin/marketplace.json"
   end
 
   test do
