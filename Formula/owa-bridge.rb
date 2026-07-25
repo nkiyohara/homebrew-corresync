@@ -1,8 +1,8 @@
 class OwaBridge < Formula
   desc "Local-first Outlook Web CLI and MCP server"
   homepage "https://github.com/nkiyohara/owa-bridge"
-  url "https://github.com/nkiyohara/owa-bridge/releases/download/v0.5.0/owa-bridge_0.5.0_source.tar.gz"
-  sha256 "a0c00bb6b08b6ea0198ece9ca1d8dd16a3eb09973f4c249be179dc8f3529fdcc"
+  url "https://github.com/nkiyohara/owa-bridge/releases/download/v0.6.0/owa-bridge_0.6.0_source.tar.gz"
+  sha256 "37b6db3b09861306a6557226af8c1e9882e9bd15f1b18e82224931b7ef8fc99f"
   license "Apache-2.0"
 
   depends_on "go" => :build
@@ -11,8 +11,8 @@ class OwaBridge < Formula
     ldflags = %W[
       -s -w -buildid=
       -X github.com/nkiyohara/owa-bridge/internal/buildinfo.version=#{version}
-      -X github.com/nkiyohara/owa-bridge/internal/buildinfo.commit=a0e7e19c8bd464e12dba2602ad6793a1690c1aea
-      -X github.com/nkiyohara/owa-bridge/internal/buildinfo.buildDate=2026-07-24T12:16:11.672509343Z
+      -X github.com/nkiyohara/owa-bridge/internal/buildinfo.commit=d19c5a12da03d470416eca3a8072eb9b1fbd2018
+      -X github.com/nkiyohara/owa-bridge/internal/buildinfo.buildDate=2026-07-25T12:23:00.741101918Z
     ]
     system "go", "build", "-mod=vendor",
            *std_go_args(output: bin/"owa", ldflags: ldflags.join(" ")),
