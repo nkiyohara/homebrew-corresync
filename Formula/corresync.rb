@@ -1,8 +1,8 @@
 class Corresync < Formula
   desc "Local-first guarded mail and calendar CLI and MCP server"
   homepage "https://github.com/nkiyohara/corresync"
-  url "https://github.com/nkiyohara/corresync/releases/download/v0.10.0/corresync_0.10.0_source.tar.gz"
-  sha256 "4182e6e4aa2d92e62c2b091e2ec3a74acb9d0730753a055df83169b8c328a790"
+  url "https://github.com/nkiyohara/corresync/releases/download/v0.10.1/corresync_0.10.1_source.tar.gz"
+  sha256 "3a9240c7a75664de7712d4e4dcc9e30f8f1d20f0a1f8198293bfb6d146ddfdcf"
   license "Apache-2.0"
 
   depends_on "go" => :build
@@ -11,8 +11,8 @@ class Corresync < Formula
     ldflags = %W[
       -s -w -buildid=
       -X github.com/nkiyohara/corresync/internal/buildinfo.version=#{version}
-      -X github.com/nkiyohara/corresync/internal/buildinfo.commit=12cd15f7dd88ca37adb633f33a14b6dde8523222
-      -X github.com/nkiyohara/corresync/internal/buildinfo.buildDate=2026-11-25T15:09:55.10206Z
+      -X github.com/nkiyohara/corresync/internal/buildinfo.commit=1af079651598222b818f7a97d07281fbb6b6b949
+      -X github.com/nkiyohara/corresync/internal/buildinfo.buildDate=2026-11-27T13:36:29.769232Z
     ]
     system "go", "build", "-mod=vendor",
            *std_go_args(output: bin/"corr", ldflags: ldflags.join(" ")),
